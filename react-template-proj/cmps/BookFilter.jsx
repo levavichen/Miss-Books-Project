@@ -18,7 +18,7 @@ export function BookFilter({ filterBy, onSetFilterBy }) {
                 break;
 
             case 'txt':
-                value
+                value = value
                 break
         }
         setFilterByToEdit(prevFilter => ({ ...prevFilter, [field]: value }))
@@ -30,8 +30,8 @@ export function BookFilter({ filterBy, onSetFilterBy }) {
 
     }
 
-    const {title, listPrice} = filterByToEdit
-    const isValid = title
+    const {txt, minPrice} = filterByToEdit
+    const isValid = txt
 
     return (
         <section className="book-filter">
@@ -40,8 +40,8 @@ export function BookFilter({ filterBy, onSetFilterBy }) {
                 <label htmlFor="txt">Title</label>
                 <input value={txt} onChange={handleChange} type="text" name="txt" id="txt" />
 
-                <label htmlFor="listPrice">List Price</label>
-                <input value={listPrice || ''} onChange={handleChange} type="number" name="listPrice" id="listPrice" />
+                <label htmlFor="minPrice">Min Price</label>
+                <input value={minPrice || ''} onChange={handleChange} type="number" name="minPrice" id="minPrice" />
 
                 <button disabled={!isValid}>Submit</button>
             </form>

@@ -21,8 +21,8 @@ export function BookDetails({ onBack, bookId }) {
     return (
         <section className="book-details">
             <h1>Book Title: {book.title}</h1>
-            <h1>Book Speed: {book.listPrice}</h1>
-            <button onClick={onBack}>Bacl</button>
+            <h1>Book Price: {book.listPrice}</h1>
+            <button onClick={onBack}>Back</button>
         </section>
     )
 }

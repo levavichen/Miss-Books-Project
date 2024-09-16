@@ -1,4 +1,4 @@
-import { UserPreview } from './UserPreview.jsx'
+import { UserPreview } from './BookPreview.jsx'
 
 export function Home() {
     return (
