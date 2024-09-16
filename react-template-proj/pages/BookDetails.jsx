@@ -31,8 +31,9 @@ export function BookDetails({ onBack, bookId }) {
     }
 
     function getTypeByPublishTime() {
-        if ((2024 - publishedDate) > 10) return 'Vintage'
-        if ((2024 - publishedDate) <= 1) return 'New'
+        const currYear = new Date().getFullYear()
+        if ((currYear - publishedDate) > 10) return 'Vintage'
+        if ((currYear - publishedDate) <= 1) return 'New'
         return ''
     }
 
@@ -42,12 +43,10 @@ export function BookDetails({ onBack, bookId }) {
         return ''
     }
 
-
-
-
     const typeOfReading = getTypeOfReading()
     const typeByPublishTime = getTypeByPublishTime()
     const amountClass = getAmountClass()
+
 
     return (
         <section className="book-details">
@@ -57,10 +56,16 @@ export function BookDetails({ onBack, bookId }) {
             <p>Description: {description}</p>
             <p>Subtitle: {subtitle}</p>
             <p>Language: {language}</p>
-            <p>Book Categories: {categories}</p>
+            <p>Book Categories: {categories.join(', ')}</p>
             <p>{typeOfReading}</p>
             <p>{typeByPublishTime}</p>
-            <img src={thumbnail} alt="book-image" />
+
+            <div className="img-container">
+                {isOnSale &&
+                    <img src={"./assets/img/onSale.svg"} alt="on-sale-icon" className="on-sale-icon" />}
+                <img src={thumbnail} alt="book-image" className="book-image" />
+            </div>
+            
             <button onClick={onBack}>Back</button>
         </section>
     )
