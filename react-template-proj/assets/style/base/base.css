@@ -47,3 +47,12 @@ object {
 .debug * {
   outline: 1px solid gold
 }
+
+.red{
+  color: red;
+  }
+  
+.green{
+    color: green;
+    }
+
