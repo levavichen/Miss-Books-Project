@@ -21,7 +21,7 @@ function query(filterBy = {}) {
                 books = books.filter(book => regExp.test(book.title))
             }
             if (filterBy.minPrice) {
-                books = books.filter(book => book.listPrice >= filterBy.minPrice)
+                books = books.filter(book => book.listPrice.amount >= filterBy.minPrice)
             }
             return books
         })
@@ -60,15 +60,78 @@ function _createBooks() {
     let books = loadFromStorage(BOOK_KEY)
     if (!books || !books.length) {
         books = []
-        books.push(_createBook('metus hendrerit', 109))
-        books.push(_createBook('morbi', 44))
-        books.push(_createBook('at viverra venenatis', 108))
+        books.push({
+            "id": "OXeMG8wNskc",
+            "title": "metus hendrerit",
+            "subtitle": "mi est eros convallis auctor arcu dapibus himenaeos",
+            "authors": [
+                "Barbara Cartland"
+            ],
+            "publishedDate": 1999,
+            "description": "placerat nisi sodales suscipit tellus tincidunt mauris elit sit luctus interdum ad dictum platea vehicula conubia fermentum habitasse congue suspendisse",
+            "pageCount": 713,
+            "categories": [
+                "Computers",
+                "Hack"
+            ],
+            "thumbnail": "http://coding-academy.org/books-photos/20.jpg",
+            "language": "en",
+            "listPrice": {
+                "amount": 109,
+                "currencyCode": "EUR",
+                "isOnSale": false
+            }
+        })
+        books.push({
+            "id": "JYOJa2NpSCq",
+            "title": "morbi",
+            "subtitle": "lorem euismod dictumst inceptos mi",
+            "authors": [
+                "Barbara Cartland"
+            ],
+            "publishedDate": 1978,
+            "description": "aliquam pretium lorem laoreet etiam odio cubilia iaculis placerat aliquam tempor nisl auctor",
+            "pageCount": 129,
+            "categories": [
+                "Computers",
+                "Hack"
+            ],
+            "thumbnail": "http://coding-academy.org/books-photos/14.jpg",
+            "language": "sp",
+            "listPrice": {
+                "amount": 44,
+                "currencyCode": "EUR",
+                "isOnSale": true
+            }
+        })
+        books.push({
+            "id": "1y0Oqts35DQ",
+            "title": "at viverra venenatis",
+            "subtitle": "gravida libero facilisis rhoncus urna etiam",
+            "authors": [
+                "Dr. Seuss"
+            ],
+            "publishedDate": 1999,
+            "description": "lorem molestie ut euismod ad quis mi ultricies nisl cursus suspendisse dui tempor sit suscipit metus etiam euismod tortor sagittis habitant",
+            "pageCount": 972,
+            "categories": [
+                "Computers",
+                "Hack"
+            ],
+            "thumbnail": "http://coding-academy.org/books-photos/2.jpg",
+            "language": "he",
+            "listPrice": {
+                "amount": 108,
+                "currencyCode": "ILS",
+                "isOnSale": false
+            }
+        })
         saveToStorage(BOOK_KEY, books)
     }
 }
 
-function _createBook(title, listPrice = 250) {
-    const book = getEmptyBook(title, listPrice)
-    book.id = makeId()
-    return book
-}
+// function _createBook(title, listPrice = 250) {
+//     const book = getEmptyBook(title, listPrice)
+//     book.id = makeId()
+//     return book
+// }
