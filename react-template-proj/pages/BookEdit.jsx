@@ -52,7 +52,9 @@ export function BookEdit() {
         ev.preventDefault()
         bookService.save(bookToEdit)
             .then(book => {
-
+                if (!bookToEdit.id) {
+                    showSuccessMsg(`Book added successfully!`)
+                }
             })
             .catch(err => {
                 console.log('err:', err)
@@ -63,7 +65,7 @@ export function BookEdit() {
     }
 
     if (!bookToEdit) return <h1>Loading..</h1>
-    
+
     const { title, listPrice: { amount } } = bookToEdit
 
     return (
