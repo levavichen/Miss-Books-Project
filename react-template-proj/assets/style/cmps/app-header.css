@@ -4,6 +4,28 @@
   padding: 1em;
 }
 
+.app-nav {
+  display: flex;
+  justify-content: space-evenly;
+  gap: 1em;
+}
+
+.app-header h1 {
+  text-align: center;
+
+  font-family: Bebas Neue;
+  font-size: 3em;
+}
+
+.app-header a {
+  font-family: Bebas Neue;
+  font-size: 1.5em;
+}
+
+.app-header a:hover{
+  color: aliceblue;
+}
+
 @media(max-width: 720px) {
   .app-header {
     color: var(--clr2bg);

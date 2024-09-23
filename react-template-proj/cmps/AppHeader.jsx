@@ -1,4 +1,7 @@
-export function AppHeader({ onSetPage }) {
+const { Link, NavLink, useNavigate } = ReactRouterDOM
+
+
+export function AppHeader() {
 
     return (
 
@@ -6,9 +9,9 @@ export function AppHeader({ onSetPage }) {
             <section>
                 <h1>Miss Books</h1>
                 <nav className="app-nav">
-                    <a onClick={() => onSetPage('home')} href="#">Home</a>
-                    <a onClick={() => onSetPage('about')} href="#">About Us</a>
-                    <a onClick={() => onSetPage('book')} href="#">Books</a>
+                    <NavLink to="/home">Home</NavLink>
+                    <NavLink to="/about">About</NavLink>
+                    <NavLink to="/book">Books</NavLink>
                 </nav>
             </section>
         </header >

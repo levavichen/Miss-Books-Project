@@ -1,0 +1,9 @@
+
+.book-filter form{
+    display: flex;
+    
+    align-items: center;
+    gap: 0.5em;
+
+    font-family: Maven Pro;
+}

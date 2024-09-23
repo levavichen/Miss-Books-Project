@@ -1,16 +1,20 @@
 const { useEffect, useState } = React
+const { useParams, useNavigate, Link } = ReactRouterDOM
+
 
 import { bookService } from "../services/book.service.js"
 
-export function BookDetails({ onBack, bookId }) {
+export function BookDetails() {
     const [book, setBook] = useState(null)
+    const params = useParams()
+    const navigate = useNavigate()
 
     useEffect(() => {
         loadBook()
-    }, [])
+    }, [params.bookId])
 
     function loadBook() {
-        bookService.get(bookId)
+        bookService.get(params.bookId)
             .then(setBook)
             .catch(err => {
                 console.log('Problem getting book', err)
@@ -19,28 +23,28 @@ export function BookDetails({ onBack, bookId }) {
 
     if (!book) return <div>Loading..</div>
 
-    const { id, title, subtitle, authors, publishedDate, description,
-        pageCount, categories, thumbnail, language,
-        listPrice: { amount, currencyCode, isOnSale } } = book
-
     function getTypeOfReading() {
-        if (pageCount > 500) return 'Serious Reading'
-        if (pageCount < 500 && pageCount > 200) return 'Descent Reading'
-        if (pageCount < 100) return 'Light Reading'
+        if (book.pageCount > 500) return 'Serious Reading'
+        if (book.pageCount < 500 && book.pageCount > 200) return 'Descent Reading'
+        if (book.pageCount < 100) return 'Light Reading'
         return ''
     }
 
     function getTypeByPublishTime() {
         const currYear = new Date().getFullYear()
-        if ((currYear - publishedDate) > 10) return 'Vintage'
-        if ((currYear - publishedDate) <= 1) return 'New'
+        if ((currYear - book.publishedDate) > 10) return 'Vintage'
+        if ((currYear - book.publishedDate) <= 1) return 'New'
         return ''
     }
 
     function getAmountClass() {
-        if (amount > 100) return 'red'
-        if (amount < 20) return 'green'
+        if (book.listPrice.amount > 100) return 'red'
+        if (book.listPrice.amount < 20) return 'green'
         return ''
+    }
+
+    function onBack(){
+        navigate('/book')
     }
 
     const typeOfReading = getTypeOfReading()
@@ -50,20 +54,20 @@ export function BookDetails({ onBack, bookId }) {
 
     return (
         <section className="book-details">
-            <h1>{title}</h1>
-            <h3>Book Price: <span className={`amount ${amountClass}`}>{amount}</span></h3>
-            <p>Authors: {authors}</p>
-            <p>Description: {description}</p>
-            <p>Subtitle: {subtitle}</p>
-            <p>Language: {language}</p>
-            <p>Book Categories: {categories.join(', ')}</p>
+            <h1>{book.title}</h1>
+            <h3>Book Price: <span className={`amount ${amountClass}`}>{book.listPrice.amount}</span></h3>
+            <p>Authors: {book.authors}</p>
+            <p>Description: {book.description}</p>
+            <p>Subtitle: {book.subtitle}</p>
+            <p>Language: {book.language}</p>
+            <p>Book Categories: {book.categories.join(', ')}</p>
             <p>{typeOfReading}</p>
             <p>{typeByPublishTime}</p>
 
             <div className="img-container">
-                {isOnSale &&
+                {book.listPrice.isOnSale &&
                     <img src={"./assets/img/onSale.svg"} alt="on-sale-icon" className="on-sale-icon" />}
-                <img src={thumbnail} alt="book-image" className="book-image" />
+                <img src={book.thumbnail} alt="book-image" className="book-image" />
             </div>
             
             <button onClick={onBack}>Back</button>
